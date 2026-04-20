@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grand Azure Hotel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dark: #9A7A30;
+    --navy: #0D1B2A;
+    --navy-mid: #162336;
+    --navy-light: #1E3250;
+    --cream: #F5F0E8;
+    --cream-dark: #EDE5D5;
+    --text: #2C1810;
+    --text-light: #6B5B4E;
+    --white: #FDFCF9;
+    --red: #C0392B;
+    --green: #1A7A4A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-icon {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--gold-light);
+  }
+
+  .logo-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 300;
+    display: block;
+    margin-top: -2px;
+  }
+
+  nav {
+    display: flex;
+    gap: 0;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.6);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  nav button:hover, nav button.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 5rem 0 3rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    padding-top: 70px;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero p {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.6);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  /* SEARCH BAR */
+  .search-bar {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    gap: 1rem;
+    align-items: end;
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+
+  .form-group select option { background: var(--navy-mid); color: var(--cream); }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8) sepia(1) saturate(2) hue-rotate(5deg);
+    opacity: 0.6;
+  }
+
+  /* BUTTONS */
+  .btn {
+    padding: 11px 24px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--navy);
+  }
+
+  .btn-gold:hover {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(201,168,76,0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .btn-danger {
+    background: rgba(192,57,43,0.15);
+    border: 1px solid rgba(192,57,43,0.4);
+    color: #E74C3C;
+  }
+
+  .btn-danger:hover { background: rgba(192,57,43,0.25); }
+
+  .btn-success {
+    background: rgba(26,122,74,0.15);
+    border: 1px solid rgba(26,122,74,0.4);
+    color: #2ECC71;
+  }
+
+  .btn-success:hover { background: rgba(26,122,74,0.25); }
+
+  .btn-sm { padding: 7px 14px; font-size: 0.72rem; }
+
+  /* ROOM GRID */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--cream);
+  }
+
+  .section-title span {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 2rem;
+  }
+
+  .filter-tab {
+    padding: 6px 16px;
+    border: 1px solid rgba(201,168,76,0.2);
+    background: transparent;
+    color: rgba(245,240,232,0.5);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+
+  .filter-tab:hover, .filter-tab.active {
+    border-color: var(--gold);
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.08);
+  }
+
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .room-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .room-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .room-img {
+    height: 200px;
+    background: var(--navy-light);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .room-img-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s;
+    opacity: 0.6;
+  }
+
+  .room-card:hover .room-img-bg { transform: scale(1.05); }
+
+  .room-type-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    background: rgba(13,27,42,0.85);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 2px;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+
+  .availability-dot {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+  }
+
+  .dot-available { background: #2ECC71; }
+  .dot-unavailable { background: #E74C3C; }
+
+  .room-body { padding: 1.2rem; }
+
+  .room-number {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .room-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .room-desc {
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .amenities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 1rem;
+  }
+
+  .amenity-tag {
+    padding: 3px 8px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 2px;
+    font-size: 0.65rem;
+    color: rgba(245,240,232,0.6);
+    letter-spacing: 0.05em;
+  }
+
+  .room-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .price-sub {
+    font-size: 0.7rem;
+    color: rgba(245,240,232,0.4);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+  }
+
+  .capacity {
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.5);
+  }
+
+  /* BOOKING FORM */
+  .booking-form-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .form-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .form-grid .full { grid-column: 1 / -1; }
+
+  .summary-card {
+    background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 0.88rem;
+  }
+
+  .summary-row.total {
+    border-top: 1px solid rgba(201,168,76,0.2);
+    margin-top: 8px;
+    padding-top: 16px;
+    font-size: 1.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    color: var(--gold-light);
+  }
+
+  .summary-label { color: rgba(245,240,232,0.5); }
+  .summary-value { color: var(--cream); font-weight: 500; }
+
+  /* BOOKINGS TABLE */
+  .table-container {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th {
+    background: rgba(201,168,76,0.08);
+    padding: 12px 16px;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  td {
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(201,168,76,0.03); }
+
+  .status-badge {
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .status-CONFIRMED { background: rgba(52,152,219,0.15); color: #3498DB; border: 1px solid rgba(52,152,219,0.3); }
+  .status-CHECKED_IN { background: rgba(46,204,113,0.15); color: #2ECC71; border: 1px solid rgba(46,204,113,0.3); }
+  .status-CHECKED_OUT { background: rgba(149,165,166,0.15); color: #95A5A6; border: 1px solid rgba(149,165,166,0.3); }
+  .status-CANCELLED { background: rgba(231,76,60,0.15); color: #E74C3C; border: 1px solid rgba(231,76,60,0.3); }
+  .status-PENDING { background: rgba(241,196,15,0.15); color: #F1C40F; border: 1px solid rgba(241,196,15,0.3); }
+
+  /* INVOICE */
+  .invoice-view {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--white);
+    color: var(--text);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .invoice-header {
+    background: var(--navy);
+    padding: 2.5rem;
+    text-align: center;
+  }
+
+  .invoice-hotel-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold-light);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+
+  .invoice-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-top: 4px;
+  }
+
+  .invoice-body { padding: 2.5rem; }
+
+  .invoice-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--cream-dark);
+  }
+
+  .invoice-meta-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+
+  .invoice-meta-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+  }
+
+  .invoice-section-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .invoice-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .invoice-field-label {
+    font-size: 0.72rem;
+    color: var(--text-light);
+    margin-bottom: 2px;
+  }
+
+  .invoice-field-value {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .invoice-line-items {
+    background: var(--cream);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .line-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+
+  .line-item.total {
+    border-top: 2px solid var(--cream-dark);
+    margin-top: 8px;
+    padding-top: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .invoice-footer {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--cream-dark);
+    font-size: 0.8rem;
+    color: var(--text-light);
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 4px;
+    padding: 2rem;
+    max-width: 480px;
+    width: 100%;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .modal p { font-size: 0.9rem; color: rgba(245,240,232,0.6); line-height: 1.6; margin-bottom: 1.5rem; }
+
+  .modal-actions { display: flex; gap: 1rem; justify-content: flex-end; }
+
+  /* TOAST */
+  .toast-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .toast {
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    max-width: 350px;
+    animation: toastIn 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .toast-success { background: #1A3D2B; border: 1px solid rgba(46,204,113,0.4); color: #2ECC71; }
+  .toast-error { background: #3D1A1A; border: 1px solid rgba(231,76,60,0.4); color: #E74C3C; }
+  .toast-info { background: var(--navy-mid); border: 1px solid rgba(201,168,76,0.3); color: var(--gold-light); }
+
+  @keyframes toastIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 4rem;
+    color: rgba(245,240,232,0.3);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: rgba(245,240,232,0.3);
+  }
+
+  .empty-state h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: rgba(245,240,232,0.2);
+  }
+
+  .empty-state p { font-size: 0.85rem; }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+    margin: 3rem 0;
+  }
+
+  .action-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  /* Step indicator */
+  .steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 3rem;
+  }
+
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+    font-weight: 500;
+  }
+
+  .step.active { color: var(--gold-light); }
+  .step.done { color: rgba(46,204,113,0.7); }
+
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .step.active .step-num {
+    background: rgba(201,168,76,0.15);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .step.done .step-num {
+    background: rgba(46,204,113,0.1);
+    border-color: rgba(46,204,113,0.4);
+    color: #2ECC71;
+  }
+
+  .step-line {
+    width: 60px;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+    margin: 0 8px;
+  }
+
+  @media (max-width: 768px) {
+    .search-bar { grid-template-columns: 1fr 1fr; }
+    .rooms-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    nav button { font-size: 0.7rem; padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🏨</div>
+      <div>
+        <div class="logo-text">Grand Azure</div>
+        <span class="logo-sub">Hotel & Resorts</span>
+      </div>
+    </div>
+    <nav>
+      <button class="active" onclick="showSection('home')">Home</button>
+      <button onclick="showSection('rooms')">Rooms</button>
+      <button onclick="showSection('book')">Book Now</button>
+      <button onclick="showSection('bookings')">My Bookings</button>
+      <button onclick="showSection('admin')">Admin</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HOME -->
+  <div id="section-home" class="section active">
+    <div class="hero">
+      <div class="hero-eyebrow">Luxury Reimagined</div>
+      <h1>Where <em>Elegance</em><br>Meets Comfort</h1>
+      <p>Experience unparalleled luxury at Grand Azure Hotel. Every stay is crafted to create memories that last a lifetime.</p>
+    </div>
+
+    <div class="search-bar">
+      <div class="form-group">
+        <label>Check-In</label>
+        <input type="date" id="home-checkin">
+      </div>
+      <div class="form-group">
+        <label>Check-Out</label>
+        <input type="date" id="home-checkout">
+      </div>
+      <div class="form-group">
+        <label>Room Type</label>
+        <select id="home-type">
+          <option value="">All Types</option>
+          <option value="STANDARD">Standard</option>
+          <option value="DELUXE">Deluxe</option>
+          <option value="SUITE">Suite</option>
+          <option value="PRESIDENTIAL">Presidential</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Guests</label>
+        <select id="home-guests">
+          <option value="1">1 Guest</option>
+          <option value="2">2 Guests</option>
+          <option value="3">3 Guests</option>
+          <option value="4">4 Guests</option>
+          <option value="5">5+ Guests</option>
+        </select>
+      </div>
+      <button class="btn btn-gold" onclick="searchRooms()">Search</button>
+    </div>
+
+    <div class="section-header">
+      <div class="section-title">Featured <span>Rooms</span></div>
+    </div>
+    <div class="rooms-grid" id="featured-rooms">
+      <div class="loading">Loading rooms...</div>
+    </div>
+  </div>
+
+  <!-- ROOMS -->
+  <div id="section-rooms" class="section">
+    <div class="section-header">
+      <div class="section-title">Our <span>Accommodations</span></div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterRooms('ALL', this)">All Rooms</button>
+      <button class="filter-tab" onclick="filterRooms('STANDARD', this)">Standard</button>
+      <button class="filter-tab" onclick="filterRooms('DELUXE', this)">Deluxe</button>
+      <button class="filter-tab" onclick="filterRooms('SUITE', this)">Suite</button>
+      <button class="filter-tab" onclick="filterRooms('PRESIDENTIAL', this)">Presidential</button>
+    </div>
+    <div class="rooms-grid" id="all-rooms">
+      <div class="loading">Loading rooms...</div>
+    </div>
+  </div>
+
+  <!-- BOOK -->
+  <div id="section-book" class="section">
+    <div class="steps">
+      <div class="step active" id="step-1"><div class="step-num">1</div> Select Room</div>
+      <div class="step-line"></div>
+      <div class="step" id="step-2"><div class="step-num">2</div> Guest Details</div>
+      <div class="step-line"></div>
+      <div class="step" id="step-3"><div class="step-num">3</div> Confirm</div>
+    </div>
+
+    <div id="book-step-1">
+      <div class="section-header">
+        <div class="section-title">Select a <span>Room</span></div>
+      </div>
+      <div class="search-bar" style="max-width:100%;margin-bottom:2rem;">
+        <div class="form-group">
+          <label>Check-In Date</label>
+          <input type="date" id="book-checkin">
+        </div>
+        <div class="form-group">
+          <label>Check-Out Date</label>
+          <input type="date" id="book-checkout">
+        </div>
+        <div class="form-group">
+          <label>Guests</label>
+          <select id="book-guests">
+            <option value="1">1</option><option value="2">2</option>
+            <option value="3">3</option><option value="4">4</option>
+            <option value="5">5</option><option value="6">6</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column:span 1"></div>
+        <button class="btn btn-outline" onclick="loadRoomsForBooking()">Refresh</button>
+      </div>
+      <div class="rooms-grid" id="book-rooms">
+        <div class="loading">Set dates and refresh to see available rooms</div>
+      </div>
+    </div>
+
+    <div id="book-step-2" style="display:none">
+      <div class="booking-form-container">
+        <div class="form-card">
+          <div class="form-card-title">Guest Information</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" id="g-firstname" placeholder="John">
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" id="g-lastname" placeholder="Doe">
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" id="g-email" placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" id="g-phone" placeholder="+1 234 567 8900">
+            </div>
+            <div class="form-group full">
+              <label>Address</label>
+              <input type="text" id="g-address" placeholder="123 Main St, City, Country">
+            </div>
+            <div class="form-group">
+              <label>ID Type</label>
+              <select id="g-idtype">
+                <option value="PASSPORT">Passport</option>
+                <option value="NATIONAL_ID">National ID</option>
+                <option value="DRIVERS_LICENSE">Driver's License</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>ID Number</label>
+              <input type="text" id="g-idnumber" placeholder="AB123456">
+            </div>
+            <div class="form-group full">
+              <label>Special Requests</label>
+              <textarea id="g-requests" rows="3" placeholder="Any dietary requirements, accessibility needs, or preferences..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-card" id="booking-summary">
+          <!-- Filled by JS -->
+        </div>
+
+        <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+          <button class="btn btn-outline" onclick="goBackToRooms()">← Back</button>
+          <button class="btn btn-gold" style="flex:1" onclick="confirmBooking()">Confirm Booking →</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="book-step-3" style="display:none">
+      <div class="booking-form-container">
+        <div class="form-card" style="text-align:center;padding:3rem">
+          <div style="font-size:4rem;margin-bottom:1rem">✅</div>
+          <div class="form-card-title" style="text-align:center">Booking Confirmed!</div>
+          <div id="booking-result"></div>
+          <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <button class="btn btn-gold" onclick="generateInvoice()">Generate Invoice</button>
+            <button class="btn btn-outline" onclick="viewBookings()">View My Bookings</button>
+            <button class="btn btn-outline" onclick="newBooking()">New Booking</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKINGS -->
+  <div id="section-bookings" class="section">
+    <div class="section-header">
+      <div class="section-title">My <span>Bookings</span></div>
+    </div>
+    <div style="display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:end;">
+      <div class="form-group" style="flex:1;min-width:200px;">
+        <label>Search by Email</label>
+        <input type="email" id="search-email" placeholder="guest@example.com">
+      </div>
+      <button class="btn btn-outline" onclick="searchByEmail()">Search</button>
+      <button class="btn btn-outline" onclick="loadAllBookings()">All Bookings</button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="bookings-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="section-admin" class="section">
+    <div class="section-title" style="margin-bottom:2rem">Admin <span style="color:var(--gold-light);font-style:italic">Dashboard</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2.5rem;" id="admin-stats"></div>
+    <div class="section-title" style="font-size:1.5rem;margin-bottom:1.5rem">All <span style="color:var(--gold-light);font-style:italic">Bookings</span></div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Guest</th>
+            <th>Room</th>
+            <th>Dates</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- Invoice Modal -->
+<div class="modal-overlay" id="invoice-modal">
+  <div class="modal" style="max-width:720px;padding:0;background:transparent;border:none;">
+    <div class="invoice-view" id="invoice-content"></div>
+    <div style="display:flex;gap:1rem;justify-content:center;margin-top:1.5rem;">
+      <button class="btn btn-gold" onclick="printInvoice()">🖨 Print Invoice</button>
+      <button class="btn btn-outline" onclick="closeModal('invoice-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal">
+    <h3 id="confirm-title">Confirm Action</h3>
+    <p id="confirm-message">Are you sure?</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal('confirm-modal')">Cancel</button>
+      <button class="btn btn-danger" id="confirm-btn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<script>
+const API = 'http://localhost:8080/api';
+let selectedRoom = null;
+let lastBooking = null;
+
+// ── Utilities ─────────────────────────────────────────────────────────────────
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'rooms') loadAllRooms();
+  if (name === 'bookings') loadAllBookings();
+  if (name === 'admin') loadAdmin();
+  if (name === 'book') initBookDates();
+}
+
+function toast(message, type = 'info') {
+  const t = document.createElement('div');
+  t.className = `toast toast-${type}`;
+  t.innerHTML = `<span>${type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ'}</span> ${message}`;
+  document.getElementById('toast-container').appendChild(t);
+  setTimeout(() => t.remove(), 4000);
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+async function api(url, method = 'GET', body = null) {
+  const opts = { method, headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(API + url, opts);
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+
+// ── Room rendering ────────────────────────────────────────────────────────────
+const roomBgs = {
+  STANDARD: 'linear-gradient(135deg,#1a2744 0%,#243355 100%)',
+  DELUXE: 'linear-gradient(135deg,#1a2744 0%,#2d1f4a 100%)',
+  SUITE: 'linear-gradient(135deg,#1a2744 0%,#4a3520 100%)',
+  PRESIDENTIAL: 'linear-gradient(135deg,#2a1a0a 0%,#4a3510 100%)',
+};
+
+const roomEmojis = { STANDARD: '🛏', DELUXE: '🛎', SUITE: '🌟', PRESIDENTIAL: '👑' };
+
+function renderRoomCard(room, selectable = false) {
+  const amenitiesHtml = (room.amenities || []).slice(0, 4).map(a =>
+    `<span class="amenity-tag">${a}</span>`).join('');
+  return `
+  <div class="room-card" onclick="${selectable ? `selectRoom(${room.id})` : `openBookWithRoom(${room.id})`}">
+    <div class="room-img">
+      <div class="room-img-bg" style="background:${roomBgs[room.type]||roomBgs.STANDARD}"></div>
+      <div style="position:relative;font-size:3rem;opacity:0.4">${roomEmojis[room.type]||'🏨'}</div>
+      <div class="room-type-badge">${room.type}</div>
+      <div class="availability-dot ${room.available ? 'dot-available' : 'dot-unavailable'}"></div>
+    </div>
+    <div class="room-body">
+      <div class="room-number">Room ${room.roomNumber}</div>
+      <div class="room-name">${getRoomName(room)}</div>
+      <div class="room-desc">${room.description}</div>
+      <div class="amenities">${amenitiesHtml}</div>
+      <div class="room-footer">
+        <div>
+          <div class="price">$${parseFloat(room.pricePerNight).toFixed(0)}<span class="price-sub"> /night</span></div>
+        </div>
+        <div class="capacity">👤 Up to ${room.capacity} guests</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function getRoomName(room) {
+  const names = {
+    STANDARD: `Classic ${room.roomNumber.startsWith('1') ? 'Garden' : 'City'} View`,
+    DELUXE: `Deluxe ${room.roomNumber.includes('01') ? 'Ocean' : 'Premium'} Room`,
+    SUITE: `Executive ${room.roomNumber.includes('01') ? 'Panoramic' : 'Terrace'} Suite`,
+    PRESIDENTIAL: 'The Presidential Suite'
+  };
+  return names[room.type] || 'Luxury Room';
+}
+
+// ── Home ─────────────────────────────────────────────────────────────────────
+async function loadFeaturedRooms() {
+  try {
+    const rooms = await api('/rooms');
+    const container = document.getElementById('featured-rooms');
+    container.innerHTML = rooms.slice(0, 3).map(r => renderRoomCard(r)).join('');
+  } catch (e) { document.getElementById('featured-rooms').innerHTML = '<div class="loading">Backend not running — start the Java server</div>'; }
+}
+
+function searchRooms() {
+  showSection('rooms');
+  document.querySelectorAll('nav button')[1].classList.add('active');
+  document.querySelectorAll('nav button')[0].classList.remove('active');
+}
+
+function openBookWithRoom(roomId) {
+  showSection('book');
+  document.querySelectorAll('nav button')[2].classList.add('active');
+  document.querySelectorAll('nav button')[0].classList.remove('active');
+  setTimeout(() => {
+    api('/rooms/' + roomId).then(room => {
+      selectedRoom = room;
+      goToStep2();
+    });
+  }, 100);
+}
+
+// ── Rooms section ─────────────────────────────────────────────────────────────
+let allRooms = [];
+
+async function loadAllRooms() {
+  try {
+    allRooms = await api('/rooms');
+    renderRooms(allRooms);
+  } catch (e) {
+    document.getElementById('all-rooms').innerHTML = '<div class="loading">Start Java server to load rooms</div>';
+  }
+}
+
+function renderRooms(rooms) {
+  const container = document.getElementById('all-rooms');
+  if (!rooms.length) {
+    container.innerHTML = '<div class="empty-state"><h3>No Rooms Found</h3><p>Try a different filter</p></div>';
+    return;
+  }
+  container.innerHTML = rooms.map(r => renderRoomCard(r)).join('');
+}
+
+function filterRooms(type, el) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderRooms(type === 'ALL' ? allRooms : allRooms.filter(r => r.type === type));
+}
+
+// ── Booking flow ──────────────────────────────────────────────────────────────
+function initBookDates() {
+  const today = new Date();
+  const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate() + 1);
+  const dayAfter = new Date(today); dayAfter.setDate(dayAfter.getDate() + 2);
+  document.getElementById('book-checkin').value = tomorrow.toISOString().split('T')[0];
+  document.getElementById('book-checkout').value = dayAfter.toISOString().split('T')[0];
+  loadRoomsForBooking();
+}
+
+async function loadRoomsForBooking() {
+  const ci = document.getElementById('book-checkin').value;
+  const co = document.getElementById('book-checkout').value;
+  try {
+    const rooms = await api('/rooms');
+    const container = document.getElementById('book-rooms');
+    container.innerHTML = rooms.map(r => `
+      <div class="room-card ${!r.available ? 'unavailable' : ''}" onclick="${r.available ? `selectRoomForBooking(${r.id})` : ''}">
+        <div class="room-img">
+          <div class="room-img-bg" style="background:${roomBgs[r.type]};${!r.available ? 'filter:grayscale(1)' : ''}"></div>
+          <div style="position:relative;font-size:3rem;opacity:0.4">${roomEmojis[r.type]}</div>
+          <div class="room-type-badge">${r.type}</div>
+          <div class="availability-dot ${r.available ? 'dot-available' : 'dot-unavailable'}"></div>
+        </div>
+        <div class="room-body">
+          <div class="room-number">Room ${r.roomNumber}</div>
+          <div class="room-name">${getRoomName(r)}</div>
+          <div class="room-desc">${r.description}</div>
+          <div class="amenities">${(r.amenities||[]).slice(0,4).map(a=>`<span class="amenity-tag">${a}</span>`).join('')}</div>
+          <div class="room-footer">
+            <div><div class="price">$${parseFloat(r.pricePerNight).toFixed(0)}<span class="price-sub"> /night</span></div></div>
+            <div>
+              <div class="capacity">👤 Up to ${r.capacity}</div>
+              ${!r.available ? '<div style="color:#E74C3C;font-size:0.72rem;margin-top:2px">Unavailable</div>' : ''}
+            </div>
+          </div>
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    document.getElementById('book-rooms').innerHTML = '<div class="loading">Start Java server to load rooms</div>';
+  }
+}
+
+function selectRoomForBooking(roomId) {
+  api('/rooms/' + roomId).then(room => {
+    selectedRoom = room;
+    goToStep2();
+  });
+}
+
+function goToStep2() {
+  document.getElementById('book-step-1').style.display = 'none';
+  document.getElementById('book-step-2').style.display = 'block';
+  document.getElementById('book-step-3').style.display = 'none';
+
+  setStepState(1, 'done');
+  setStepState(2, 'active');
+  setStepState(3, '');
+
+  // Update summary
+  const ci = document.getElementById('book-checkin').value;
+  const co = document.getElementById('book-checkout').value;
+  const nights = ci && co ? Math.max(1, Math.ceil((new Date(co)-new Date(ci))/(86400000))) : 1;
+  const subtotal = (parseFloat(selectedRoom.pricePerNight) * nights).toFixed(2);
+  const tax = (subtotal * 0.12).toFixed(2);
+  const total = (parseFloat(subtotal) + parseFloat(tax)).toFixed(2);
+
+  document.getElementById('booking-summary').innerHTML = `
+    <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Booking Summary</div>
+    <div class="summary-row"><span class="summary-label">Room</span><span class="summary-value">Room ${selectedRoom.roomNumber} — ${selectedRoom.type}</span></div>
+    <div class="summary-row"><span class="summary-label">Check-In</span><span class="summary-value">${ci}</span></div>
+    <div class="summary-row"><span class="summary-label">Check-Out</span><span class="summary-value">${co}</span></div>
+    <div class="summary-row"><span class="summary-label">Nights</span><span class="summary-value">${nights} night${nights>1?'s':''}</span></div>
+    <div class="summary-row"><span class="summary-label">Rate</span><span class="summary-value">$${parseFloat(selectedRoom.pricePerNight).toFixed(2)}/night</span></div>
+    <div class="summary-row"><span class="summary-label">Subtotal</span><span class="summary-value">$${subtotal}</span></div>
+    <div class="summary-row"><span class="summary-label">Tax (12%)</span><span class="summary-value">$${tax}</span></div>
+    <div class="summary-row total"><span>Total</span><span>$${total}</span></div>`;
+}
+
+function goBackToRooms() {
+  document.getElementById('book-step-1').style.display = 'block';
+  document.getElementById('book-step-2').style.display = 'none';
+  setStepState(1, 'active'); setStepState(2, ''); setStepState(3, '');
+  selectedRoom = null;
+}
+
+function setStepState(n, state) {
+  const el = document.getElementById('step-' + n);
+  el.className = 'step' + (state ? ' ' + state : '');
+  if (state === 'done') el.querySelector('.step-num').textContent = '✓';
+  else el.querySelector('.step-num').textContent = n;
+}
+
+async function confirmBooking() {
+  const ci = document.getElementById('book-checkin').value;
+  const co = document.getElementById('book-checkout').value;
+  const guests = document.getElementById('book-guests').value;
+  const fn = document.getElementById('g-firstname').value.trim();
+  const ln = document.getElementById('g-lastname').value.trim();
+  const email = document.getElementById('g-email').value.trim();
+  const phone = document.getElementById('g-phone').value.trim();
+
+  if (!fn || !ln || !email || !phone) { toast('Please fill all required fields', 'error'); return; }
+  if (!ci || !co) { toast('Please select check-in and check-out dates', 'error'); return; }
+
+  try {
+    const booking = await api('/bookings', 'POST', {
+      roomId: selectedRoom.id, checkIn: ci, checkOut: co,
+      numGuests: parseInt(guests), firstName: fn, lastName: ln,
+      email, phone,
+      address: document.getElementById('g-address').value,
+      idType: document.getElementById('g-idtype').value,
+      idNumber: document.getElementById('g-idnumber').value,
+      specialRequests: document.getElementById('g-requests').value
+    });
+
+    lastBooking = booking;
+    document.getElementById('book-step-2').style.display = 'none';
+    document.getElementById('book-step-3').style.display = 'block';
+    setStepState(2, 'done'); setStepState(3, 'active');
+
+    document.getElementById('booking-result').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;text-align:left;margin-top:1.5rem;">
+        <div><div class="summary-label" style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px">Booking ID</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream)">${booking.bookingId}</div></div>
+        <div><div class="summary-label" style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px">Total Amount</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold-light)">$${parseFloat(booking.totalAmount).toFixed(2)}</div></div>
+        <div><div class="summary-label" style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-bottom:4px">Room</div>
+          <div style="color:rgba(245,240,232,0.8)">Room ${booking.room.roomNumber}</div></div>
+        <div><div class="summary-label" style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-bottom:4px">Dates</div>
+          <div style="color:rgba(245,240,232,0.8)">${booking.checkInDate} → ${booking.checkOutDate}</div></div>
+      </div>`;
+
+    toast('Booking confirmed! ID: ' + booking.bookingId, 'success');
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+async function generateInvoice() {
+  if (!lastBooking) return;
+  try {
+    const inv = await api('/invoices', 'POST', { bookingId: lastBooking.bookingId });
+    showInvoice(inv);
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function viewBookings() {
+  document.querySelectorAll('nav button')[3].click();
+}
+
+function newBooking() {
+  selectedRoom = null; lastBooking = null;
+  document.getElementById('book-step-1').style.display = 'block';
+  document.getElementById('book-step-2').style.display = 'none';
+  document.getElementById('book-step-3').style.display = 'none';
+  [1,2,3].forEach(n => setStepState(n, n===1?'active':''));
+}
+
+// ── Bookings list ─────────────────────────────────────────────────────────────
+async function loadAllBookings() {
+  try {
+    const bookings = await api('/bookings');
+    renderBookingsTable(bookings, 'bookings-table');
+  } catch(e) {
+    document.getElementById('bookings-table').innerHTML = '<tr><td colspan="8" style="text-align:center;color:rgba(245,240,232,0.3);padding:2rem">Start Java server to load bookings</td></tr>';
+  }
+}
+
+async function searchByEmail() {
+  const email = document.getElementById('search-email').value.trim();
+  if (!email) { loadAllBookings(); return; }
+  try {
+    const bookings = await api('/bookings?email=' + encodeURIComponent(email));
+    renderBookingsTable(bookings, 'bookings-table');
+    toast(`Found ${bookings.length} booking(s)`, 'info');
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function renderBookingsTable(bookings, tableId) {
+  const tbody = document.getElementById(tableId);
+  if (!bookings.length) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:rgba(245,240,232,0.3);padding:2rem">No bookings found</td></tr>';
+    return;
+  }
+  tbody.innerHTML = bookings.map(b => `
+    <tr>
+      <td style="font-family:'Cormorant Garamond',serif;color:var(--gold-light)">${b.bookingId}</td>
+      <td>${b.guest.firstName} ${b.guest.lastName}<br><span style="font-size:0.75rem;color:rgba(245,240,232,0.4)">${b.guest.email}</span></td>
+      <td>Room ${b.room.roomNumber}<br><span style="font-size:0.75rem;color:rgba(245,240,232,0.4)">${b.room.type}</span></td>
+      <td>${b.checkInDate}</td>
+      <td>${b.checkOutDate}</td>
+      <td style="color:var(--gold-light)">$${parseFloat(b.totalAmount).toFixed(2)}</td>
+      <td><span class="status-badge status-${b.status}">${b.status.replace('_',' ')}</span></td>
+      <td>
+        <div class="action-bar">
+          <button class="btn btn-outline btn-sm" onclick="getAndShowInvoice('${b.bookingId}')">Invoice</button>
+          ${b.status === 'CONFIRMED' ? `<button class="btn btn-danger btn-sm" onclick="cancelBooking('${b.bookingId}')">Cancel</button>` : ''}
+        </div>
+      </td>
+    </tr>`).join('');
+}
+
+// ── Admin ─────────────────────────────────────────────────────────────────────
+async function loadAdmin() {
+  try {
+    const [bookings, rooms] = await Promise.all([api('/bookings'), api('/rooms')]);
+    const stats = {
+      total: bookings.length,
+      confirmed: bookings.filter(b=>b.status==='CONFIRMED').length,
+      checkedIn: bookings.filter(b=>b.status==='CHECKED_IN').length,
+      revenue: bookings.filter(b=>b.status!=='CANCELLED').reduce((s,b)=>s+parseFloat(b.totalAmount),0)
+    };
+
+    document.getElementById('admin-stats').innerHTML = [
+      { label: 'Total Bookings', value: stats.total, icon: '📋' },
+      { label: 'Confirmed', value: stats.confirmed, icon: '✅' },
+      { label: 'Checked In', value: stats.checkedIn, icon: '🔑' },
+      { label: 'Total Revenue', value: '$'+stats.revenue.toFixed(2), icon: '💰' },
+      { label: 'Total Rooms', value: rooms.length, icon: '🏨' },
+      { label: 'Available', value: rooms.filter(r=>r.available).length, icon: '🟢' },
+    ].map(s => `
+      <div style="background:var(--navy-mid);border:1px solid rgba(201,168,76,0.12);border-radius:4px;padding:1.5rem;text-align:center">
+        <div style="font-size:2rem;margin-bottom:8px">${s.icon}</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light)">${s.value}</div>
+        <div style="font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.4);margin-top:4px">${s.label}</div>
+      </div>`).join('');
+
+    // Admin table with more actions
+    const tbody = document.getElementById('admin-table');
+    tbody.innerHTML = bookings.map(b => `
+      <tr>
+        <td style="font-family:'Cormorant Garamond',serif;color:var(--gold-light)">${b.bookingId}</td>
+        <td>${b.guest.firstName} ${b.guest.lastName}<br><span style="font-size:0.75rem;color:rgba(245,240,232,0.4)">${b.guest.email}</span></td>
+        <td>Room ${b.room.roomNumber} (${b.room.type})</td>
+        <td>${b.checkInDate}<br><span style="font-size:0.75rem;color:rgba(245,240,232,0.4)">→ ${b.checkOutDate}</span></td>
+        <td style="color:var(--gold-light)">$${parseFloat(b.totalAmount).toFixed(2)}</td>
+        <td><span class="status-badge status-${b.status}">${b.status.replace('_',' ')}</span></td>
+        <td>
+          <div class="action-bar">
+            ${b.status==='CONFIRMED' ? `<button class="btn btn-success btn-sm" onclick="doAction('checkin','${b.bookingId}')">Check In</button>` : ''}
+            ${b.status==='CHECKED_IN' ? `<button class="btn btn-outline btn-sm" onclick="doAction('checkout','${b.bookingId}')">Check Out</button>` : ''}
+            ${b.status==='CONFIRMED' ? `<button class="btn btn-danger btn-sm" onclick="cancelBooking('${b.bookingId}')">Cancel</button>` : ''}
+            <button class="btn btn-outline btn-sm" onclick="getAndShowInvoice('${b.bookingId}')">Invoice</button>
+          </div>
+        </td>
+      </tr>`).join('');
+  } catch(e) {
+    document.getElementById('admin-stats').innerHTML = '<div style="color:rgba(245,240,232,0.3);padding:1rem">Start Java server</div>';
+  }
+}
+
+async function doAction(action, bookingId) {
+  try {
+    await api('/bookings/' + bookingId, 'PUT', { action });
+    toast(`Action '${action}' completed for ${bookingId}`, 'success');
+    loadAdmin();
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function cancelBooking(bookingId) {
+  document.getElementById('confirm-title').textContent = 'Cancel Booking';
+  document.getElementById('confirm-message').textContent = `Are you sure you want to cancel booking ${bookingId}? This action cannot be undone.`;
+  document.getElementById('confirm-btn').onclick = async () => {
+    try {
+      await api('/bookings/' + bookingId, 'PUT', { action: 'cancel' });
+      closeModal('confirm-modal');
+      toast('Booking cancelled: ' + bookingId, 'success');
+      loadAllBookings();
+      loadAdmin();
+    } catch(e) { toast(e.message, 'error'); closeModal('confirm-modal'); }
+  };
+  document.getElementById('confirm-modal').classList.add('open');
+}
+
+// ── Invoice ───────────────────────────────────────────────────────────────────
+async function getAndShowInvoice(bookingId) {
+  try {
+    const inv = await api('/invoices', 'POST', { bookingId });
+    showInvoice(inv);
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function showInvoice(inv) {
+  const b = inv.booking;
+  const g = b.guest;
+  const r = b.room;
+  const nights = Math.ceil((new Date(b.checkOutDate)-new Date(b.checkInDate))/(86400000));
+
+  document.getElementById('invoice-content').innerHTML = `
+    <div class="invoice-header">
+      <div class="invoice-hotel-name">Grand Azure Hotel</div>
+      <div class="invoice-tagline">Luxury Redefined · Excellence Delivered</div>
+      <div style="margin-top:1rem;font-size:0.75rem;color:rgba(245,240,232,0.4)">123 Azure Boulevard, Coastal City · +1 800 AZURE · info@grandazure.com</div>
+    </div>
+    <div class="invoice-body">
+      <div class="invoice-meta">
+        <div>
+          <div class="invoice-meta-label">Invoice Number</div>
+          <div class="invoice-meta-value">${inv.invoiceNumber}</div>
+        </div>
+        <div>
+          <div class="invoice-meta-label">Booking ID</div>
+          <div class="invoice-meta-value">${b.bookingId}</div>
+        </div>
+        <div style="text-align:right">
+          <div class="invoice-meta-label">Issue Date</div>
+          <div class="invoice-meta-value">${inv.issueDate}</div>
+        </div>
+      </div>
+
+      <div class="invoice-section-title">Guest Information</div>
+      <div class="invoice-detail">
+        <div><div class="invoice-field-label">Full Name</div><div class="invoice-field-value">${g.firstName} ${g.lastName}</div></div>
+        <div><div class="invoice-field-label">Email</div><div class="invoice-field-value">${g.email}</div></div>
+        <div><div class="invoice-field-label">Phone</div><div class="invoice-field-value">${g.phone}</div></div>
+        <div><div class="invoice-field-label">Address</div><div class="invoice-field-value">${g.address || '—'}</div></div>
+      </div>
+
+      <div class="invoice-section-title">Accommodation Details</div>
+      <div class="invoice-detail">
+        <div><div class="invoice-field-label">Room Number</div><div class="invoice-field-value">${r.roomNumber}</div></div>
+        <div><div class="invoice-field-label">Room Type</div><div class="invoice-field-value">${r.type}</div></div>
+        <div><div class="invoice-field-label">Check-In</div><div class="invoice-field-value">${b.checkInDate}</div></div>
+        <div><div class="invoice-field-label">Check-Out</div><div class="invoice-field-value">${b.checkOutDate}</div></div>
+      </div>
+
+      <div class="invoice-section-title">Billing Breakdown</div>
+      <div class="invoice-line-items">
+        <div class="line-item">
+          <span>Room Rate × ${nights} night${nights>1?'s':''}</span>
+          <span>$${parseFloat(r.pricePerNight).toFixed(2)} × ${nights}</span>
+        </div>
+        <div class="line-item"><span>Subtotal</span><span>$${parseFloat(inv.subtotal).toFixed(2)}</span></div>
+        <div class="line-item"><span>Tax & Service (12%)</span><span>$${parseFloat(inv.taxAmount).toFixed(2)}</span></div>
+        <div class="line-item total"><span>Total Due</span><span>$${parseFloat(inv.totalAmount).toFixed(2)}</span></div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <div>
+          <div class="invoice-field-label">Payment Status</div>
+          <span class="status-badge status-${inv.paymentStatus}" style="margin-top:4px;display:inline-block">${inv.paymentStatus}</span>
+        </div>
+        ${inv.paymentStatus !== 'PAID' ? `<button class="btn btn-gold btn-sm" onclick="payInvoice('${inv.invoiceNumber}')">Mark as Paid</button>` : ''}
+      </div>
+    </div>
+    <div class="invoice-footer">
+      Thank you for choosing Grand Azure Hotel. We look forward to welcoming you.<br>
+      For inquiries: +1 800 AZURE · info@grandazure.com
+    </div>`;
+
+  document.getElementById('invoice-modal').classList.add('open');
+}
+
+async function payInvoice(invoiceNum) {
+  try {
+    const inv = await api('/invoices/' + invoiceNum, 'PUT', { paymentMethod: 'CREDIT_CARD' });
+    toast('Payment recorded successfully!', 'success');
+    showInvoice(inv);
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function printInvoice() { window.print(); }
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+// Set min dates
+const today = new Date().toISOString().split('T')[0];
+document.querySelectorAll('input[type="date"]').forEach(i => i.min = today);
+
+loadFeaturedRooms();
+</script>
+</body>
+</html>
